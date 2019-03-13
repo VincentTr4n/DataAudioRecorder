@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">DataAudioRecorder</string>
-    <string-array name="my_commanders">
+    <string-array name="my_commanders_vn">
         <item>Một</item>
         <item>Hai</item>
         <item>Ba</item>
@@ -20,5 +20,26 @@
         <item>Tăng</item>
         <item>Giảm</item>
         <item>Gọi</item>
+    </string-array>
+    <string-array name="my_commanders_en">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+        <item>four</item>
+        <item>five</item>
+        <item>six</item>
+        <item>seven</item>
+        <item>eight</item>
+        <item>nine</item>
+        <item>zero</item>
+        <item>up</item>
+        <item>down</item>
+        <item>left</item>
+        <item>right</item>
+        <item>on</item>
+        <item>off</item>
+        <item>increase</item>
+        <item>decrease</item>
+        <item>call</item>
     </string-array>
 </resources>

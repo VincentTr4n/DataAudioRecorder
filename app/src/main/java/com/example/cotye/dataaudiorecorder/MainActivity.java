@@ -26,10 +26,11 @@ import cafe.adriel.androidaudiorecorder.model.AudioSource;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final int REQUEST_RECORD_AUDIO = 0;
-    private static String AUDIO_FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/myfolder";
+    private static String AUDIO_FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
 
     private String selectedCommander = "";
     private String filePath = "";
+    private String[] commanderArrayEn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +42,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimaryDark)));
         }
 
+        commanderArrayEn = getResources().getStringArray(R.array.my_commanders_en);
+
         Util.requestPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO);
         Util.requestPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         Spinner spinner = findViewById(R.id.spn_commanders);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.my_commanders, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.my_commanders_vn, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
@@ -74,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void recordAudio(View v) {
+        filePath = Util.createFilePath(AUDIO_FILE_PATH , selectedCommander);
+        Toast.makeText(this, filePath, Toast.LENGTH_LONG).show();
         AndroidAudioRecorder.with(this)
                 // Required
                 .setFilePath(filePath)
@@ -93,9 +98,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        selectedCommander = parent.getItemAtPosition(position).toString();
-        filePath = Util.createFilePath(AUDIO_FILE_PATH , selectedCommander);
-        Toast.makeText(this, filePath, Toast.LENGTH_LONG).show();
+        selectedCommander = commanderArrayEn[position];
+        Toast.makeText(this, selectedCommander + "|" + parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -17,10 +17,10 @@ public class Util {
     }
     public static String createFilePath(String path, String commander){
         Random rnd = new Random();
-        int num = rnd.nextInt();
+        int num = Math.abs(rnd.nextInt());
         File file = new File(path + "/" + commander +"_" + String.valueOf(num) + ".wav");
         while(file.exists()){
-            num = rnd.nextInt();
+            num = Math.abs(rnd.nextInt());
             file = new File(path + "/" + commander +"_" + String.valueOf(num) + ".wav");
         }
         return file.toString();
