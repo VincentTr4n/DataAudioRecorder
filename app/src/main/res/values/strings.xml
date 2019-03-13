@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">DataAudioRecorder</string>
+    <string-array name="my_commanders">
+        <item>Một</item>
+        <item>Hai</item>
+        <item>Ba</item>
+        <item>Bốn</item>
+        <item>Năm</item>
+        <item>Sáu</item>
+        <item>Bảy</item>
+        <item>Tám</item>
+        <item>Chín</item>
+        <item>Không</item>
+        <item>Lên</item>
+        <item>Xuống</item>
+        <item>Trái</item>
+        <item>Phải</item>
+        <item>Bật</item>
+        <item>Tắt</item>
+        <item>Tăng</item>
+        <item>Giảm</item>
+        <item>Gọi</item>
+    </string-array>
+</resources>
