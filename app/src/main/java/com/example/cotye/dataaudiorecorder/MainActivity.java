@@ -23,14 +23,13 @@ import cafe.adriel.androidaudiorecorder.model.AudioChannel;
 import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
 import cafe.adriel.androidaudiorecorder.model.AudioSource;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity{
 
     private static final int REQUEST_RECORD_AUDIO = 0;
     private static String AUDIO_FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-    private String selectedCommander = "";
+    private String selectedCommander = "my_data";
     private String filePath = "";
-    private String[] commanderArrayEn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +41,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimaryDark)));
         }
 
-        commanderArrayEn = getResources().getStringArray(R.array.my_commanders_en);
 
         Util.requestPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO);
         Util.requestPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        Spinner spinner = findViewById(R.id.spn_commanders);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.my_commanders_vn, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
 
         Button btnStart = findViewById(R.id.btnStart);
 
@@ -68,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_RECORD_AUDIO) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "Audio recorded successfully! in " + filePath, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Audio recorded successfully! in " + filePath, Toast.LENGTH_SHORT).show();
                 Log.e("MyTag", AUDIO_FILE_PATH);
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Audio was not recorded", Toast.LENGTH_SHORT).show();
@@ -78,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void recordAudio(View v) {
         filePath = Util.createFilePath(AUDIO_FILE_PATH , selectedCommander);
-        Toast.makeText(this, filePath, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, filePath, Toast.LENGTH_LONG).show();
         AndroidAudioRecorder.with(this)
                 // Required
                 .setFilePath(filePath)
@@ -87,23 +80,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 // Optional
                 .setSource(AudioSource.MIC)
-                .setChannel(AudioChannel.STEREO)
-                .setSampleRate(AudioSampleRate.HZ_48000)
+                .setChannel(AudioChannel.MONO)
+                .setSampleRate(AudioSampleRate.HZ_16000)
                 .setAutoStart(false)
                 .setKeepDisplayOn(true)
-
                 // Start recording
+
                 .record();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        selectedCommander = commanderArrayEn[position];
-        Toast.makeText(this, selectedCommander + "|" + parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

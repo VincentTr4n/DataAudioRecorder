@@ -14,13 +14,4 @@
         android:text="Start Record"
         android:id="@+id/btnStart"/>
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:dropDownWidth="100dp"
-        android:id="@+id/spn_commanders"
-        >
-
-    </Spinner>
-
 </LinearLayout>
